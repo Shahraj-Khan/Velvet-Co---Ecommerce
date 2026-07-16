@@ -45,21 +45,6 @@ return [
             'provider' => 'admins',
         ],
     ],
-    'guards' => [
-        'web' => [
-            'driver' => 'session',
-            'provider' => 'users',
-        ],
-        'admin' => [
-            'driver' => 'session',
-            'provider' => 'admins',
-        ],
-        'api' => [ // Thêm guard api
-            'driver' => 'sanctum', // Hoặc 'passport' nếu bạn dùng Laravel passport
-            'provider' => 'users',
-            'hash' => false,
-        ],
-    ],
 
     /*
     |--------------------------------------------------------------------------

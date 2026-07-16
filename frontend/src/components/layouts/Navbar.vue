@@ -6,9 +6,11 @@
           <div class="col-xl-12">
             <div class="relative_contect d-flex">
               <!-- Menu categories -->
+<!--- 
               <div class="wsus_menu_category_bar">
                 <i class="far fa-bars"></i>
               </div>
+----->
               <ul class="wsus_menu_cat_item show_home toggle_menu">
                             <!-- <li><a href="#"><i class="fas fa-star"></i> hot promotions</a></li>
                             <li><a class="wsus__droap_arrow" href="#"><i class="fal fa-tshirt"></i> Fashion </a>
@@ -275,8 +277,8 @@
   </template>
   
   <script setup>
-  import { onMounted } from 'vue'
-  import { useAuthStore } from '@/stores/useAuthStore'
+import { onMounted } from 'vue'
+import { useAuthStore } from '@/stores/useAuthStore'
 import { useRouter } from 'vue-router';
   
   const authStore = useAuthStore()

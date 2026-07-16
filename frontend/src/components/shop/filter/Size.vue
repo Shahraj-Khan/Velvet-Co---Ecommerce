@@ -3,7 +3,7 @@
     <h2 class="accordion-header">
       <button class="accordion-button" type="button" data-bs-toggle="collapse"
         data-bs-target="#collapseSize" aria-expanded="true">
-        Kích thước ({{ totalSizeProducts }})
+        Sizes ({{ totalSizeProducts }})
         <span v-if="activeSizeCount > 0" class="badge bg-danger ms-2">
           {{ activeSizeCount }}
         </span>
@@ -23,7 +23,7 @@
         </div>
         <div v-if="activeSizeCount > 0" class="mt-2">
           <button class="btn btn-sm btn-outline-danger" @click="clearSizeFilter">
-            <i class="fas fa-times me-1"></i> Xóa lọc
+            <i class="fas fa-times me-1"></i> Clear Filter
           </button>
         </div>
       </div>

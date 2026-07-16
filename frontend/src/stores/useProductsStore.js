@@ -164,13 +164,16 @@ export const useProductsStore = defineStore("products", {
     hasActiveFilters: (state) => Object.keys(state.activeFilters).length > 0,
 
     // Định dạng giá tiền theo tiền tệ Việt Nam (VND)
-    formatPrice: () => (price) =>
-      new Intl.NumberFormat("vi-VN", {
-        style: "currency",
-        currency: "VND",
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 2,
-      }).format(price).replace('₫', '').trim() + ' VND',
+formatPrice: () => (price) =>
+  new Intl.NumberFormat("en-BD", {
+    style: "currency",
+    currency: "BDT",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 2,
+  })
+    .format(price)
+    .replace("৳", "")
+    .trim() + " BDT",
 
     // Thông tin phân trang (current, total, per page)
     paginationInfo: (state) => ({

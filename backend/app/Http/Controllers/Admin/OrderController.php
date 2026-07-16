@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    // Danh sách đơn hàng
+    // Order List
     public function index()
     {
         $orders = Order::with(['user', 'products'])
@@ -18,14 +18,14 @@ class OrderController extends Controller
         return view('admin.orders.index', compact('orders'));
     }
 
-    // Chi tiết đơn hàng
+    // Order Details
     public function show(Order $order)
     {
         $order->load(['user', 'products', 'transactions']);
         return view('admin.orders.show', compact('order'));
     }
 
-    // Cập nhật trạng thái đơn hàng
+    // Update Order Status
     public function updateStatus(Request $request, Order $order)
     {
         $request->validate([
@@ -34,10 +34,10 @@ class OrderController extends Controller
 
         $order->update(['status' => $request->status]);
 
-        return back()->with('success', 'Cập nhật trạng thái đơn hàng thành công!');
+        return back()->with('success', 'Order status updated successfully!');
     }
 
-    // Cập nhật trạng thái thanh toán
+   // Update Order Status
     public function updatePaymentStatus(Request $request, Order $order)
     {
         $request->validate([
@@ -46,10 +46,10 @@ class OrderController extends Controller
 
         $order->update(['payment_status' => $request->payment_status]);
 
-        return back()->with('success', 'Cập nhật trạng thái thanh toán thành công!');
+        return back()->with('success', 'Payment status updated successfully!');
     }
 
-    // Cập nhật ghi chú
+    // Update Order Status
     public function updateNotes(Request $request, Order $order)
     {
         $request->validate([
@@ -58,7 +58,7 @@ class OrderController extends Controller
 
         $order->update(['notes' => $request->notes]);
 
-        return back()->with('success', 'Cập nhật ghi chú thành công!');
+        return back()->with('success', 'Note updated successfully!');
     }
     
 }

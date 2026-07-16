@@ -70,7 +70,7 @@ const handleApplyCoupon = async () => {
   couponError.value = '';
   
   if (!couponCode.value?.trim()) {
-    couponError.value = 'Vui lòng nhập mã giảm giá';
+    couponError.value = 'Please enter a coupon code';
     return;
   }
 
@@ -90,22 +90,22 @@ const validateBillingData = () => {
     const missingFields = requiredFields.filter(field => !billing.value[field]);
     
     if (missingFields.length > 0) {
-        toast.error(`Vui lòng điền đầy đủ thông tin: ${missingFields.join(', ')}`);
+        toast.error(`Please fill in all required fields tin: ${missingFields.join(', ')}`);
         return false;
     }
     
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(billing.value.email)) {
-        toast.error('Email không hợp lệ');
+        toast.error('Invalid email address');
         return false;
     }
     
     if (!/^[0-9]{10,15}$/.test(billing.value.phone)) {
-        toast.error('Số điện thoại không hợp lệ');
+        toast.error('Invalid phone number');
         return false;
     }
     
     if (!agreeTerms.value) {
-        toast.error('Vui lòng đồng ý với điều khoản và điều kiện');
+        toast.error('Please agree to the terms and conditions');
         return false;
     }
     
@@ -156,7 +156,7 @@ const handleCODCheckout = async () => {
     cartStore.clearCart();
     cartStore.removeCoupon();
     
-    toast.success('Đặt hàng thành công!');
+    toast.success('Order placed successfully!');
     router.push({ name: 'OrderConfirmation', params: { id: response.data.order.id } });
     
   } catch (error) {
@@ -171,7 +171,7 @@ const handleCheckoutError = (error) => {
     
     if (error.response?.status === 422) {
         const errors = error.response.data.errors;
-        let errorMessage = 'Vui lòng kiểm tra lại thông tin:';
+        let errorMessage = 'Please review your information:';
         
         for (const [field, messages] of Object.entries(errors)) {
             errorMessage += `\n- ${field}: ${messages.join(', ')}`;
@@ -179,11 +179,11 @@ const handleCheckoutError = (error) => {
         
         toast.error(errorMessage);
     } else if (error.response?.status === 401) {
-        toast.error('Phiên đăng nhập hết hạn. Vui lòng đăng nhập lại');
+        toast.error('Session expired. Please log in again');
         authStore.logout();
         router.push('/login');
     } else {
-        toast.error('Đặt hàng thất bại: ' + 
+        toast.error('Your order could not be placed: ' + 
             (error.response?.data?.message || error.message));
     }
 };
@@ -273,21 +273,21 @@ const handleCheckoutError = (error) => {
                         
                         <div class="col-xl-12 mb-3">
                             <div class="wsus__check_single_form">
-                                <input type="text" placeholder="Nhập mã giảm giá" v-model="couponCode"
+                                <input type="text" placeholder="Enter promo code" v-model="couponCode"
                                     class="form-control" />
                                 <button class="btn btn-primary mt-2" @click.prevent="handleApplyCoupon"
                                     :disabled="isApplyingCoupon || !couponCode">
-                                    {{ isApplyingCoupon ? 'Đang xử lý...' : 'Áp dụng' }}
+                                    {{ isApplyingCoupon ? 'Processing...' : 'Apply' }}
                                 </button>
                                 <span v-if="couponError" class="text-danger d-block mt-2">
                                     {{ couponError }}
                                 </span>
 
                                 <div v-if="cartStore.coupon" class="mt-2 text-success">
-  <p>Đã áp dụng mã: <strong>{{ cartStore.coupon.name }}</strong></p>
-  <p>Số lần đã dùng: {{ cartStore.userCouponUsage }}/{{ cartStore.coupon.max_use_per_user }}</p>
+  <p>Promo code applied: <strong>{{ cartStore.coupon.name }}</strong></p>
+  <p>Number of uses: {{ cartStore.userCouponUsage }}/{{ cartStore.coupon.max_use_per_user }}</p>
   <button @click="cartStore.removeCoupon()" class="btn btn-sm btn-danger">
-    Xóa mã
+    Remove
   </button>
 </div>
                             </div>
@@ -345,12 +345,12 @@ const handleCheckoutError = (error) => {
                         </div>
 
                         <div class="payment-methods mt-4">
-                            <h5 class="mb-3">Phương thức thanh toán</h5>
+                            <h5 class="mb-3">Payment method</h5>
 
                             <div class="d-grid gap-3">
                                 <button @click="handleCODCheckout" class="btn btn-primary" :disabled="isProcessing">
                                     <i class="bi bi-truck me-2"></i>
-                                    Thanh toán khi nhận hàng (COD)
+                                    Cash on delivery
                                     <span v-if="isProcessing" class="spinner-border spinner-border-sm ms-2"></span>
                                 </button>
                             </div>

@@ -48,11 +48,10 @@ class Transaction extends Model
         return 'TRX-' . now()->format('YmdHis') . '-' . strtoupper(substr(uniqid(), -6));
     }
 
-    public function getFormattedAmountAttribute()
+    public function getFormattedTotalAttribute()
     {
-        return number_format($this->amount, 0, ',', '.') . '₫';
+    return '৳ ' . number_format($this->total, 2);
     }
-
     public function markAsSuccess($transactionId = null)
     {
         $this->update([

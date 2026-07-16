@@ -1,8 +1,9 @@
 <template>
     <div class="not-found">
-      <h1>404 - Trang không tìm thấy</h1>
-      <p>Xin lỗi, trang bạn yêu cầu không tồn tại.</p>
-      <router-link to="/">Trở về trang chủ</router-link>
+      <h1>404 - Page Not Found</h1>
+      <p>Oops! The page you requested could not be found.
+Go Home</p>
+      <router-link to="/">Return to home page</router-link>
     </div>
   </template>
   

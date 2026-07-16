@@ -4,7 +4,7 @@ import SearchForm from '../shop/filter/SearchForm.vue';
 import { useCartStore } from '@/stores/useCartStore';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { useRouter } from 'vue-router';
-import logo from '@/assets/images/logohungmain.png';
+import logo from '@/assets/images/logo-footer.png';
 const cartStore = useCartStore();
 
 const total = computed(() => cartStore.cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0));
@@ -18,7 +18,7 @@ const handleLogout = async () => {
     }
 };
 
-// Khi component mounted, kiểm tra user nếu đã có token
+// Check for user token on component mount
 onMounted(() => {
     if (authStore.accessToken) {
         authStore.fetchCurrentUser()
@@ -63,7 +63,7 @@ onMounted(() => {
                 <div class="col-xl-2 col-7 col-md-8 col-lg-2">
                     <div class="wsus_logo_area">
                         <router-link class="wsus__header_logo" to="/">
-                            <img :src="logo" alt="logo" class="img-fluid w-100">
+                               <img :src="logo" alt="logo" class="img-fluid w-100">
                            <!-- <span class="text-light fw-semibold fs-6" style="margin-top: 2px; line-height: 1;margin-left: 25px ;">
                                 Ecommerce
                             </span> -->
@@ -74,13 +74,6 @@ onMounted(() => {
                 <div class="col-xl-5 col-3 col-md-3 col-lg-6">
                     <div class="wsus__call_icon_area">
                         <div class="wsus__call_area">
-                            <div class="wsus__call">
-                                <i class="fas fa-user-headset"></i>
-                            </div>
-                            <div class="wsus__call_text">
-                                <p>example@gmail.com</p>
-                                <p>+569875544220</p>
-                            </div>
                         </div>
                         <ul class="wsus__icon_area">
                             <li><a href="wishlist.html"><i class="fal fa-heart"></i><span>05</span></a></li>
@@ -115,6 +108,7 @@ onMounted(() => {
 
             </div>
         </div>
+
 
     </header>
     <!--============================

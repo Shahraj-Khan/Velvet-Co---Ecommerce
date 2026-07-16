@@ -4,12 +4,12 @@
 <div class="page-wrapper">
     <div class="page-content">
         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-            <div class="breadcrumb-title pe-3">Quản lý đơn hàng</div>
+            <div class="breadcrumb-title pe-3">Order Management</div>
             <div class="ps-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.index') }}"><i class="bx bx-home-alt"></i></a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Danh sách đơn hàng</li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}"><i class="bx bx-home-alt"></i></a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Order List</li>
                     </ol>
                 </nav>
             </div>
@@ -21,13 +21,13 @@
                     <table class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th>Mã đơn</th>
-                                <th>Khách hàng</th>
-                                <th>Ngày đặt</th>
-                                <th>Tổng tiền</th>
-                                <th>Trạng thái</th>
-                                <th>Thanh toán</th>
-                                <th>Thao tác</th>
+                                <th>Order ID</th>
+                                <th>Customer</th>
+                                <th>Date</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                                <th>Payment</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -49,7 +49,7 @@
                                 </td>
                                 <td>
                                     <a href="{{ route('admin.orders.show', $order) }}" class="btn btn-sm btn-primary">
-                                        <i class="bx bx-show"></i> Xem
+                                        <i class="bx bx-show"></i> View
                                     </a>
                                 </td>
                             </tr>

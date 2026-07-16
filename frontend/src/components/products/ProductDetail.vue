@@ -249,8 +249,8 @@
               </p>
 
               <h4>
-                ${{ productDetailStore.product?.price?.toFixed(2) || '0.00' }}
-                <del>$60.00</del>
+                ৳{{ productDetailStore.product?.price?.toFixed(2) || '0.00' }}
+                <del>৳60.00</del>
               </h4>
 
               <StarRating v-model:rating="reviewAvg" :show-rating="false" read-only :star-size="24" />
@@ -607,9 +607,21 @@ const isProductInStock = computed(() => {
   return productDetailStore.product?.status && productDetailStore.product?.quantity > 0
 })
 
+const hasColors = computed(() => {
+  return productDetailStore.product?.colors?.length > 0;
+});
+
+const hasSizes = computed(() => {
+  return productDetailStore.product?.sizes?.length > 0;
+});
+
 const isAddToCartDisabled = computed(() => {
-  return !data.chosenColor || !data.chosenSize || !isProductInStock.value
-})
+  return (
+    (hasColors.value && !data.chosenColor) ||
+    (hasSizes.value && !data.chosenSize) ||
+    !isProductInStock.value
+  );
+});
 
 const reviewAvg = computed(() => {
   const reviews = productDetailStore.product?.reviews || [];
@@ -643,8 +655,8 @@ const addToCart = () => {
     slug: productDetailStore.product?.slug,
     quantity: data.quantity,
     price: productDetailStore.product?.price,
-    color: data.chosenColor?.name,
-    size: data.chosenSize?.name,
+    color: hasColors.value ? data.chosenColor?.name : null,
+    size: hasSizes.value ? data.chosenSize?.name : null,
     maxQuantity: productDetailStore.product?.quantity,
     image: productDetailStore.product?.thumbnail,
     coupon_id: null,

@@ -13,6 +13,7 @@ use App\Http\Requests\UpdateProductRequest;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
+
 class ProductController extends Controller
 {
     /**
@@ -40,37 +41,45 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(AddProductRequest $request)
-    {
-        if ($request->validated()) {
-            $data = $request->validated();
-            $data['slug'] = Str::slug($request->name);
-    
-            if ($request->hasFile('thumbnail')) {
-                $data['thumbnail'] = $this->saveImage($request->file('thumbnail'));
-            }
-    
-            if ($request->hasFile('first_image')) {
-                $data['first_image'] = $this->saveImage($request->file('first_image'));
-            }
-            if ($request->hasFile('second_image')) {
-                $data['second_image'] = $this->saveImage($request->file('second_image'));
-            }
-            if ($request->hasFile('third_image')) {
-                $data['third_image'] = $this->saveImage($request->file('third_image'));
-            }
-    
-            // Create the product
-            $product = Product::create($data);
-    
-            // Sync the selected colors and sizes with the product
-            $product->colors()->sync($request->color_id);  // Sync multiple colors
-            $product->sizes()->sync($request->size_id);  // Sync multiple sizes
-    
-            return redirect()->route('admin.products.index')->with('success', 'Product created successfully.');
-        }
+public function store(AddProductRequest $request)
+{
+    $data = $request->validated();
+
+    $data['slug'] = Str::slug($request->name);
+
+    if ($request->hasFile('thumbnail')) {
+        $data['thumbnail'] = $this->saveImage($request->file('thumbnail'));
     }
-    
+
+    if ($request->hasFile('first_image')) {
+        $data['first_image'] = $this->saveImage($request->file('first_image'));
+    }
+    if ($request->hasFile('second_image')) {
+    $data['second_image'] = $this->saveImage(
+        $request->file('second_image')
+    );
+}
+
+if ($request->hasFile('third_image')) {
+    $data['third_image'] = $this->saveImage(
+        $request->file('third_image')
+    );
+}
+    $sizeIds = $data['size_id'] ?? [];
+$colorIds = $data['color_id'] ?? [];
+
+unset($data['size_id']);
+unset($data['color_id']);
+
+$product = Product::create($data);
+
+$product->colors()->sync($colorIds);
+$product->sizes()->sync($sizeIds);
+
+return redirect()
+    ->route('admin.products.index')
+    ->with('success', 'Product created successfully.');
+}
 
     /**
      * Display the specified resource.

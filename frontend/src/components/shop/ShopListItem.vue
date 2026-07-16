@@ -33,45 +33,49 @@
         </p>
         
         
-        <a class="add_cart" href="#" @click.prevent="addToCart">Thêm vào giỏ</a>
+        <a class="add_cart" href="#" @click.prevent="addToCart">Add to Cart</a>
       </div>
     </div>
   </template>
   
-  <script setup>
-  import { useCartStore } from '@/stores/useCartStore';
-  
-  const props = defineProps({
-    product: {
-      type: Object,
-      required: true
-    }
+<script setup>
+import { useCartStore } from '@/stores/useCartStore';
+import { makeUniqueId } from '@/helpers/config';
+
+const props = defineProps({
+  product: {
+    type: Object,
+    required: true
+  }
+});
+
+const cartStore = useCartStore();
+
+const formatPrice = (price) => {
+  return new Intl.NumberFormat('en-BD', {
+    style: 'currency',
+    currency: 'BDT'
+  }).format(price);
+};
+
+const addToCart = () => {
+  cartStore.addToCart({
+    ref: makeUniqueId(10),
+    product_id: props.product.id,
+    name: props.product.name,
+    slug: props.product.slug,
+    quantity: 1,
+    price: props.product.discount > 0
+      ? props.product.discounted_price
+      : props.product.price,
+    color: null,
+    size: null,
+    maxQuantity: props.product.quantity,
+    image: props.product.thumbnail,
+    coupon_id: null,
   });
-  
-  const cartStore = useCartStore();
-  
-  const formatPrice = (price) => {
-    return new Intl.NumberFormat('vi-VN', {
-      style: 'currency',
-      currency: 'VND'
-    }).format(price);
-  };
-//   const formatPrice = (price) => {
-//   return new Intl.NumberFormat('en-US', {
-//     style: 'currency',
-//     currency: 'USD',
-//     minimumFractionDigits: 0,
-//     maximumFractionDigits: 2
-//   }).format(price);
-// };
-  const addToCart = () => {
-    cartStore.addToCart({
-      id: props.product.id,
-      quantity: 1,
-      product: props.product
-    });
-  };
-  </script>
+};
+</script>
   
   <style scoped>
 

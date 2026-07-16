@@ -69,8 +69,9 @@ public function getReviewCountAttribute()
     }
     public function orders()
     {
-
-        return $this->belongsToMany(Order::class);
+    return $this->belongsToMany(Order::class)
+        ->withPivot('quantity', 'price', 'color', 'size', 'image')
+        ->withTimestamps();
     }
 
     // public function reviews()

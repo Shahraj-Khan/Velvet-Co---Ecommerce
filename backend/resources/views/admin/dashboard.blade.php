@@ -9,7 +9,7 @@
                     <div class="d-flex align-items-center">
                         <div>
                             <p class="mb-0 text-secondary">Total Orders</p>
-                            <h4 class="my-1 text-info">${{$toDayOrders->count()}}</h4>
+                            <h4 class="my-1 text-info">{{ $totalOrders }}</h4>
                             <p class="mb-0 font-13">+2.5% from last week</p>
                         </div>
                         <div class="widgets-icons-2 rounded-circle bg-gradient-blues text-white ms-auto"><i class='bx bxs-cart'></i>
@@ -24,7 +24,7 @@
                    <div class="d-flex align-items-center">
                        <div>
                            <p class="mb-0 text-secondary">Total Revenue</p>
-                           <h4 class="my-1 text-danger">${{$yesterdayOrders->count()}}</h4>
+                           <h4 class="my-1 text-danger">৳{{ number_format($totalRevenue, 2) }}</h4>
                            <p class="mb-0 font-13">+5.4% from last week</p>
                        </div>
                        <div class="widgets-icons-2 rounded-circle bg-gradient-burning text-white ms-auto"><i class='bx bxs-wallet'></i>
@@ -38,8 +38,8 @@
                <div class="card-body">
                    <div class="d-flex align-items-center">
                        <div>
-                           <p class="mb-0 text-secondary">Bounce Rate</p>
-                           <h4 class="my-1 text-success">{{$monthOrders->count()}}</h4>
+                           <p class="mb-0 text-secondary">Pending Orders</p>
+                           <h4 class="my-1 text-success">{{ $totalCustomers }}</h4>
                            <p class="mb-0 font-13">-4.5% from last week</p>
                        </div>
                        <div class="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto"><i class='bx bxs-bar-chart-alt-2' ></i>
@@ -54,7 +54,7 @@
                    <div class="d-flex align-items-center">
                        <div>
                            <p class="mb-0 text-secondary">Total Customers</p>
-                           <h4 class="my-1 text-warning">${{$yearOrders->count()}}</h4>
+                           <h4 class="my-1 text-warning">{{ $pendingOrders }}</h4>
                            <p class="mb-0 font-13">+8.4% from last week</p>
                        </div>
                        <div class="widgets-icons-2 rounded-circle bg-gradient-orange text-white ms-auto"><i class='bx bxs-group'></i>
@@ -150,17 +150,46 @@
                         <canvas id="chart2"></canvas>
                       </div>
                    </div>
-                   <ul class="list-group list-group-flush">
-                    <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center border-top">Jeans <span class="badge bg-success rounded-pill">25</span>
-                    </li>
-                    <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">T-Shirts <span class="badge bg-danger rounded-pill">10</span>
-                    </li>
-                    <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">Shoes <span class="badge bg-primary rounded-pill">65</span>
-                    </li>
-                    <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">Lingerie <span class="badge bg-warning text-dark rounded-pill">14</span>
-                    </li>
-                </ul>
-               </div>
+                   
+                   
+<ul class="list-group list-group-flush">
+
+@forelse($trendingProducts as $product)
+
+<li class="list-group-item d-flex justify-content-between align-items-center">
+
+    <div class="d-flex align-items-center">
+
+        <img src="{{ asset($product->thumbnail) }}"
+             class="product-img-2 me-2"
+             alt="{{ $product->name }}">
+
+        <div>
+            <strong>{{ $product->name }}</strong>
+            <br>
+            <small class="text-muted">{{ $product->total_sold }} Sold</small>
+        </div>
+
+    </div>
+
+    <span class="badge bg-success rounded-pill">
+        {{ $product->total_sold }}
+    </span>
+
+</li>
+
+@empty
+
+<li class="list-group-item text-center">
+    No products found.
+</li>
+
+@endforelse
+
+</ul>
+               
+            
+            </div>
            </div>
         </div><!--end row-->
 
@@ -190,87 +219,66 @@
                  <div class="card-body">
                  <div class="table-responsive">
                    <table class="table align-middle mb-0">
-                    <thead class="table-light">
-                     <tr>
-                       <th>Product</th>
-                       <th>Photo</th>
-                       <th>Product ID</th>
-                       <th>Status</th>
-                       <th>Amount</th>
-                       <th>Date</th>
-                       <th>Shipping</th>
-                     </tr>
-                     </thead>
-                     <tbody><tr>
-                      <td>Iphone 5</td>
-                      <td><img src="assets/images/products/01.png" class="product-img-2" alt="product img"></td>
-                      <td>#9405822</td>
-                      <td><span class="badge bg-gradient-quepal text-white shadow-sm w-100">Paid</span></td>
-                      <td>$1250.00</td>
-                      <td>03 Feb 2020</td>
-                      <td><div class="progress" style="height: 6px;">
-                            <div class="progress-bar bg-gradient-quepal" role="progressbar" style="width: 100%"></div>
-                          </div></td>
-                     </tr>
-  
-                     <tr>
-                      <td>Earphone GL</td>
-                      <td><img src="assets/images/products/02.png" class="product-img-2" alt="product img"></td>
-                      <td>#8304620</td>
-                      <td><span class="badge bg-gradient-blooker text-white shadow-sm w-100">Pending</span></td>
-                      <td>$1500.00</td>
-                      <td>05 Feb 2020</td>
-                      <td><div class="progress" style="height: 6px;">
-                            <div class="progress-bar bg-gradient-blooker" role="progressbar" style="width: 60%"></div>
-                          </div></td>
-                     </tr>
-  
-                     <tr>
-                      <td>HD Hand Camera</td>
-                      <td><img src="assets/images/products/03.png" class="product-img-2" alt="product img"></td>
-                      <td>#4736890</td>
-                      <td><span class="badge bg-gradient-bloody text-white shadow-sm w-100">Failed</span></td>
-                      <td>$1400.00</td>
-                      <td>06 Feb 2020</td>
-                      <td><div class="progress" style="height: 6px;">
-                            <div class="progress-bar bg-gradient-bloody" role="progressbar" style="width: 70%"></div>
-                          </div></td>
-                     </tr>
-  
-                     <tr>
-                      <td>Clasic Shoes</td>
-                      <td><img src="assets/images/products/04.png" class="product-img-2" alt="product img"></td>
-                      <td>#8543765</td>
-                      <td><span class="badge bg-gradient-quepal text-white shadow-sm w-100">Paid</span></td>
-                      <td>$1200.00</td>
-                      <td>14 Feb 2020</td>
-                      <td><div class="progress" style="height: 6px;">
-                            <div class="progress-bar bg-gradient-quepal" role="progressbar" style="width: 100%"></div>
-                          </div></td>
-                     </tr>
-                     <tr>
-                      <td>Sitting Chair</td>
-                      <td><img src="assets/images/products/06.png" class="product-img-2" alt="product img"></td>
-                      <td>#9629240</td>
-                      <td><span class="badge bg-gradient-blooker text-white shadow-sm w-100">Pending</span></td>
-                      <td>$1500.00</td>
-                      <td>18 Feb 2020</td>
-                      <td><div class="progress" style="height: 6px;">
-                            <div class="progress-bar bg-gradient-blooker" role="progressbar" style="width: 60%"></div>
-                          </div></td>
-                     </tr>
-                     <tr>
-                      <td>Hand Watch</td>
-                      <td><img src="assets/images/products/05.png" class="product-img-2" alt="product img"></td>
-                      <td>#8506790</td>
-                      <td><span class="badge bg-gradient-bloody text-white shadow-sm w-100">Failed</span></td>
-                      <td>$1800.00</td>
-                      <td>21 Feb 2020</td>
-                      <td><div class="progress" style="height: 6px;">
-                            <div class="progress-bar bg-gradient-bloody" role="progressbar" style="width: 40%"></div>
-                          </div></td>
-                     </tr>
-                    </tbody>
+<thead class="table-light">
+<tr>
+    <th>Order Code</th>
+    <th>Customer</th>
+    <th>Total</th>
+    <th>Payment</th>
+    <th>Status</th>
+    <th>Date</th>
+    <th>Action</th>
+</tr>
+</thead>
+ 
+<tbody>
+@forelse($recentOrders as $order)
+<tr>
+
+    <td>{{ $order->order_code }}</td>
+
+    <td>{{ $order->customer_name }}</td>
+
+    <td>৳{{ number_format($order->total,2) }}</td>
+
+    <td>
+        @if($order->payment_status=='completed')
+            <span class="badge bg-success">Paid</span>
+
+        @elseif($order->payment_status=='pending')
+            <span class="badge bg-warning text-dark">Pending</span>
+
+        @else
+            <span class="badge bg-danger">Failed</span>
+        @endif
+    </td>
+
+    <td>
+        <span class="badge bg-primary">
+            {{ ucfirst($order->status) }}
+        </span>
+    </td>
+
+    <td>{{ $order->created_at->format('d M Y') }}</td>
+
+    <td>
+        <a href="{{ route('admin.orders.show',$order->id) }}"
+           class="btn btn-sm btn-primary">
+            View
+        </a>
+    </td>
+
+</tr>
+@empty
+<tr>
+    <td colspan="7" class="text-center">
+        No recent orders found.
+    </td>
+</tr>
+
+
+@endforelse
+</tbody>
                   </table>
                   </div>
                  </div>
@@ -456,12 +464,26 @@
                               </div>
                         </div>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center border-top">Completed <span class="badge bg-gradient-quepal rounded-pill">25</span>
-                            </li>
-                            <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">Pending <span class="badge bg-gradient-ibiza rounded-pill">10</span>
-                            </li>
-                            <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">Process <span class="badge bg-gradient-deepblue rounded-pill">65</span>
-                            </li>
+<li class="list-group-item d-flex bg-transparent justify-content-between align-items-center border-top">
+    Completed
+    <span class="badge bg-success rounded-pill">
+        {{ $completedOrders }}
+    </span>
+</li>
+
+<li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">
+    Pending
+    <span class="badge bg-danger rounded-pill">
+        {{ $pendingOrders }}
+    </span>
+</li>
+
+<li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">
+    Processing
+    <span class="badge bg-primary rounded-pill">
+        {{ $processingOrders }}
+    </span>
+</li>
                         </ul>
                     </div>
                   </div>
@@ -512,6 +534,126 @@
                   </div>
              </div><!--end row-->
 
+<div class="card radius-10">
+    <div class="card-header">
+        <h6 class="mb-0">Low Stock Products</h6>
+    </div>
+
+    <div class="card-body">
+        <div class="list-group list-group-flush">
+
+            @forelse($lowStockProducts as $product)
+
+                <div class="list-group-item d-flex align-items-center">
+
+                    <img src="{{ asset($product->thumbnail) }}"
+                         class="product-img-2 me-3"
+                         alt="{{ $product->name }}">
+
+                    <div class="flex-grow-1">
+
+                        <h6 class="mb-0">{{ $product->name }}</h6>
+
+                        <small class="text-muted">
+                            Stock Left:
+                            <strong>{{ $product->quantity }}</strong>
+                        </small>
+
+                    </div>
+
+                    @if($product->quantity <= 5)
+
+                        <span class="badge bg-danger">
+                            Critical
+                        </span>
+
+                    @else
+
+                        <span class="badge bg-warning text-dark">
+                            Low
+                        </span>
+
+                    @endif
+
+                </div>
+
+            @empty
+
+                <div class="text-center text-success py-3">
+                    🎉 All products have sufficient stock.
+                </div>
+
+            @endforelse
+
+        </div>
     </div>
 </div>
+<!-- ==========================
+     Low Stock Products end
+========================== -->
+
+<!-- ==========================
+     Top Categorise start
+========================== -->
+
+<div class="card radius-10">
+    <div class="card-header">
+        <h6 class="mb-0">Top Selling Categories</h6>
+    </div>
+
+    <div class="card-body">
+
+        @forelse($topCategories as $category)
+
+            <div class="d-flex justify-content-between align-items-center mb-3">
+
+                <div>
+                    <h6 class="mb-0">{{ $category->name }}</h6>
+                </div>
+
+                <span class="badge bg-primary">
+                    {{ $category->total_sold }} Sold
+                </span>
+
+            </div>
+
+        @empty
+
+            <p class="text-muted mb-0">
+                No sales found.
+            </p>
+
+        @endforelse
+
+    </div>
+</div>
+
+<!-- ==========================
+     Top Categorise end    
+========================== -->
+
+
+    </div>
+</div>
+
+
+
+<script>
+    const salesData = @json($salesData);
+
+    const salesLabels = [
+        'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+    ];
+
+ window.statusData = @json($statusData);
+
+ //chart-5
+ window.orderData = @json($orderData);
+//chart-3
+window.paymentData = @json($paymentData);
+
+</script>
+
+
 @endsection

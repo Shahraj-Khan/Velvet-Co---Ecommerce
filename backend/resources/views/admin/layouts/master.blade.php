@@ -44,12 +44,12 @@
 
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
     {{-- <link rel="stylesheet" href="{{ asset('/admin/assets/css/bootstrap-iconpicker.min.css') }}" /> --}}
-<!-- Thêm Toastr CSS vào <head> -->
+<!-- <head> -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
 
-    <!-- Thêm Toastr JS vào <body> -->
+    <!-- <body> -->
     
-    <title>Rocker - Bootstrap 5 Admin Dashboard Template</title>
+    <title>Velvet Co - Admin Dashboard</title>
  
 
 </head>
@@ -718,10 +718,10 @@
                     <div class="user-box dropdown px-3">
                         <a class="d-flex align-items-center nav-link dropdown-toggle gap-3 dropdown-toggle-nocaret"
                             href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="/admin/assets/images/avatars/avatar-2.png" class="user-img" alt="user avatar">
+                            <img src="/admin/assets/images/avatars/avatar-26.png" class="user-img" alt="user avatar">
                             <div class="user-info">
-                                <p class="user-name mb-0">Pauline Seitz</p>
-                                <p class="designattion mb-0">Web Designer</p>
+                                <p class="user-name mb-0">Shahraj Khan</p>
+                                <p class="designattion mb-0">Web Developer</p>
                             </div>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
@@ -975,7 +975,7 @@
     <script src="{{ asset('/admin/assets/plugins/vectormap/jquery-jvectormap-2.0.2.min.js') }}"></script>
     <script src="{{ asset('/admin/assets/plugins/vectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
     <script src="{{ asset('/admin/assets/plugins/chartjs/js/chart.js') }}"></script>
-    {{-- <script src="{{ asset('/admin/assets/js/index.js') }}"></script> --}}
+    <script src="{{ asset('/admin/assets/js/index.js') }}"></script> 
     <!--tagsinput-->
     <script src="{{ asset('/admin/assets/plugins/input-tags/js/tagsinput.js') }}"></script>
     <!--tagsinput-->

@@ -10,19 +10,19 @@
     <div class="card shadow">
       <div class="card-body">
         <h2 class="text-success mb-4">
-          <i class="bi bi-check-circle-fill"></i> Đặt hàng thành công!
+          <i class="bi bi-check-circle-fill"></i> Order placed successfully!
         </h2>
         
         <div class="order-details">
-          <p><strong>Mã đơn hàng:</strong> {{ order.order_code || order.id }}</p>
-          <p><strong>Ngày đặt:</strong> {{ new Date(order.created_at).toLocaleString() }}</p>
-          <p><strong>Phương thức thanh toán:</strong> {{ route.query.payment_method === 'cod' ? 'COD' : 'Momo' }}</p>
-          <p><strong>Tổng tiền:</strong> {{ formatPrice(order.total) }}</p>
-          <p><strong>Trạng thái:</strong> {{ order.status || 'Đang xử lý' }}</p>
+          <p><strong>Order ID:</strong> {{ order.order_code || order.id }}</p>
+          <p><strong>Purchase date:</strong> {{ new Date(order.created_at).toLocaleString() }}</p>
+          <p><strong>Payment method:</strong> {{ route.query.payment_method === 'cod' ? 'COD' : 'Momo' }}</p>
+          <p><strong>Total amount:</strong> {{ formatPrice(order.total) }}</p>
+          <p><strong>Status:</strong> {{ order.status || 'Đang xử lý' }}</p>
         </div>
 
         <div class="mt-4">
-          <h5>Thông tin giao hàng</h5>
+          <h5>Shipping information</h5>
           <p>{{ order.billing?.name }}</p>
           <p>{{ order.billing?.phone }}</p>
           <p>{{ order.billing?.address }}, {{ order.billing?.city }}</p>
@@ -30,7 +30,7 @@
 
         <div class="mt-4 no-print">
           <button @click="router.push('/')" class="btn btn-primary">
-            <i class="bi bi-house-door"></i> Về trang chủ
+            <i class="bi bi-house-door"></i> Back to home
           </button>
         </div>
       </div>
@@ -38,7 +38,7 @@
   </div>
 
   <div v-else class="alert alert-danger text-center">
-    Không tìm thấy thông tin đơn hàng
+    We couldn't find your order
   </div>
 </template>
 <script setup>
@@ -59,9 +59,9 @@ const authStore = useAuthStore()
 const paymentStore = usePaymentStore()
 
 const formatPrice = (price) => {
-  return new Intl.NumberFormat('vi-VN', {
+  return new Intl.NumberFormat('en-BD', {
     style: 'currency',
-    currency: 'VND'
+    currency: 'BDT'
   }).format(price)
 }
 
@@ -85,8 +85,8 @@ onMounted(async () => {
     paymentStore.setCurrentOrder(response.data.data) // Lưu vào store
     
   } catch (error) {
-    console.error('Lỗi khi lấy thông tin đơn hàng:', error)
-    toast.error('Không thể tải thông tin đơn hàng: ' + (error.response?.data?.message || error.message))
+    console.error('Error retrieving order details:', error)
+    toast.error('Unable to load order details: ' + (error.response?.data?.message || error.message))
     router.push('/')
   } finally {
     loading.value = false

@@ -360,4 +360,48 @@ private function restoreCoupon(Order $order): void
         }
     }
 }
+public function trackOrder($order_code)
+{
+    $order = Order::where('order_code', $order_code)
+        ->with(['products'])
+        ->first();
+
+    if (!$order) {
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Order not found'
+        ], 404);
+    }
+
+    return response()->json([
+        'status' => 'success',
+        'order' => $order
+    ]);
 }
+public function dashboardStats()
+{
+    $userId = auth('sanctum')->id();
+
+    return response()->json([
+        'status' => 'success',
+
+        'stats' => [
+
+            'total_orders' => Order::where('user_id', $userId)->count(),
+
+            'pending_orders' => Order::where('user_id', $userId)
+                ->where('status', Order::STATUS_PENDING)
+                ->count(),
+
+            'completed_orders' => Order::where('user_id', $userId)
+                ->where('status', Order::STATUS_DELIVERED)
+                ->count(),
+
+            'cancelled_orders' => Order::where('user_id', $userId)
+                ->where('status', Order::STATUS_CANCELLED)
+                ->count(),
+        ]
+    ]);
+}
+}
+

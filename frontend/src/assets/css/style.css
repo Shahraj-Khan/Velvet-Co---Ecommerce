@@ -1433,6 +1433,19 @@ PRODUCT MODAL VIEW END
 #wsus__banner .slick-dots li.slick-active button {
   background:rgb(219, 184, 104) ;
 }
+/* Tablet */
+@media (max-width: 992px) {
+    .wsus__single_slider {
+        min-height: 500px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .wsus__single_slider {
+        min-height: 350px;
+    }
+}
 
 /*======================
 	BANNER PART END

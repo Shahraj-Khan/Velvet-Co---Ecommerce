@@ -1,11 +1,11 @@
 <template>
     <div v-if="hasActiveFilters" class="active-filters mb-4">
       <div class="d-flex flex-wrap align-items-center gap-2">
-        <span class="fw-bold">Bộ lọc:</span>
+        <span class="fw-bold">Filter:</span>
         
         <template v-if="route.query.category_id">
           <span class="badge bg-primary d-flex align-items-center">
-            Danh mục: {{ getCategoryName(route.query.category_id) }}
+            Categories: {{ getCategoryName(route.query.category_id) }}
             <button @click="removeFilter('category_id')" class="ms-2 bg-transparent border-0 text-white">
               <i class="fas fa-times"></i>
             </button>
@@ -14,7 +14,7 @@
         
         <template v-if="route.query.brand_id">
           <span class="badge bg-primary d-flex align-items-center">
-            Thương hiệu: {{ getBrandName(route.query.brand_id) }}
+            Brand: {{ getBrandName(route.query.brand_id) }}
             <button @click="removeFilter('brand_id')" class="ms-2 bg-transparent border-0 text-white">
               <i class="fas fa-times"></i>
             </button>
@@ -23,7 +23,7 @@
         
         <template v-if="route.query.size_id">
           <span class="badge bg-primary d-flex align-items-center">
-            Kích thước: {{ getSizeNames(route.query.size_id) }}
+            Size: {{ getSizeNames(route.query.size_id) }}
             <button @click="removeFilter('size_id')" class="ms-2 bg-transparent border-0 text-white">
               <i class="fas fa-times"></i>
             </button>
@@ -32,7 +32,7 @@
         
         <template v-if="route.query.color_id">
           <span class="badge bg-primary d-flex align-items-center">
-            Màu sắc: {{ getColorNames(route.query.color_id) }}
+            Color: {{ getColorNames(route.query.color_id) }}
             <button @click="removeFilter('color_id')" class="ms-2 bg-transparent border-0 text-white">
               <i class="fas fa-times"></i>
             </button>
@@ -41,7 +41,7 @@
         
         <template v-if="route.query.min_price || route.query.max_price">
           <span class="badge bg-primary d-flex align-items-center">
-            Giá: {{ priceRangeText }}
+            Price: {{ priceRangeText }}
             <button @click="removePriceFilter" class="ms-2 bg-transparent border-0 text-white">
               <i class="fas fa-times"></i>
             </button>
@@ -49,7 +49,7 @@
         </template>
         
         <button @click="resetAllFilters" class="btn btn-sm btn-outline-danger ms-2">
-          <i class="fas fa-trash-alt me-1"></i> Xóa tất cả
+          <i class="fas fa-trash-alt me-1"></i>Clear All
         </button>
       </div>
     </div>

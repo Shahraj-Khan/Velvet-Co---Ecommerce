@@ -74,12 +74,12 @@
   const amount = ref(parseFloat(route.query.amount) || 0);
   const errorMessage = ref('');
   
-  const formatPrice = (price) => {
-    return new Intl.NumberFormat('vi-VN', {
-      style: 'currency',
-      currency: 'VND'
-    }).format(price);
-  };
+const formatPrice = (price) => {
+  return new Intl.NumberFormat('en-BD', {
+    style: 'currency',
+    currency: 'BDT',
+  }).format(price);
+};
   
   onMounted(async () => {
     if (!orderId.value) {

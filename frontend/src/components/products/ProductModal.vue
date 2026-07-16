@@ -13,7 +13,7 @@
                         <div class="col-xl-6 col-12 col-sm-10 col-md-8 col-lg-6 m-auto display">
                             <div class="wsus__quick_view_img">
                                 <a class="venobox wsus__pro_det_video" data-autoplay="true" data-vbtype="video"
-                                    href="https://youtu.be/7m16dFI1AF8">
+                                    href="#">
                                     <i class="fas fa-play"></i>
                                 </a>
                                 <div class="row modal_slider">

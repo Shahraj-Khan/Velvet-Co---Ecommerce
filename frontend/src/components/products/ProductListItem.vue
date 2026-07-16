@@ -25,8 +25,10 @@
                                                     <i class="fas fa-star-half-alt"></i>
                                                     <span>(17 review)</span>
                                                 </p>
+                                                <router-link :to="`/product/${product.slug}`">
                                                 <a class="wsus__pro_name" href="#">{{ product.name }}</a>
-                                                <p class="wsus__price">${{ product.price }} <del>$200</del></p>
+                                                 </router-link>
+                                                <p class="wsus__price">৳{{ product.price }} <del>৳60.00</del></p>
                                                 <a class="add_cart" href="#">add to cart</a>
                                             </div>
                                         </div>

@@ -104,7 +104,7 @@ protected static function boot()
 
     public function getFormattedTotalAttribute()
     {
-        return number_format($this->total, 0, ',', '.') . '₫';
+    return '৳ ' . number_format($this->total, 2);
     }
     public function coupon()
     {

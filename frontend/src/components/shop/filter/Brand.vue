@@ -3,7 +3,7 @@
     <h2 class="accordion-header">
       <button class="accordion-button" type="button" data-bs-toggle="collapse"
         data-bs-target="#collapseBrand" aria-expanded="true">
-        Thương hiệu ({{ totalBrandProducts }})
+        Brands ({{ totalBrandProducts }})
       </button>
     </h2>
     <div id="collapseBrand" class="accordion-collapse collapse show">

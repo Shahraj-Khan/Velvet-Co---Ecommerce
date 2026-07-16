@@ -17,10 +17,10 @@ $(function() {
       var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+          labels: salesLabels,
           datasets: [{
-            label: 'Laptops',
-            data: [65, 59, 80, 81,65, 59, 80, 81,59, 80, 81,65],
+            label: 'Revenue',
+            data: salesData,
             borderColor: gradientStroke1,
             backgroundColor: gradientStroke1,
             hoverBackgroundColor: gradientStroke1,
@@ -237,7 +237,7 @@ var ctx = document.getElementById("chart4").getContext('2d');
               gradientStroke3
             ],
 
-            data: [50, 50, 50],
+            data: statusData,
       borderWidth: [1, 1, 1]
           }]
         },
@@ -272,10 +272,13 @@ var ctx = document.getElementById("chart4").getContext('2d');
       var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-          labels: [1, 2, 3, 4, 5],
+          labels: [
+    'Jan','Feb','Mar','Apr','May','Jun',
+    'Jul','Aug','Sep','Oct','Nov','Dec'
+],
           datasets: [{
             label: 'Clothing',
-            data: [40, 30, 60, 35, 60],
+            data: orderData,
             borderColor: gradientStroke1,
             backgroundColor: gradientStroke1,
             hoverBackgroundColor: gradientStroke1,
@@ -283,14 +286,12 @@ var ctx = document.getElementById("chart4").getContext('2d');
             fill: false,
             borderWidth: 1
           }, {
-            label: 'Electronic',
-            data: [50, 60, 40, 70, 35],
-            borderColor: gradientStroke2,
-            backgroundColor: gradientStroke2,
-            hoverBackgroundColor: gradientStroke2,
-            pointRadius: 0,
-            fill: false,
-            borderWidth: 1
+                label: 'Orders',
+                data: orderData,
+                borderColor: gradientStroke1,
+                backgroundColor: gradientStroke1,
+                hoverBackgroundColor: gradientStroke1,
+                borderWidth: 1
           }]
         },
         options: {

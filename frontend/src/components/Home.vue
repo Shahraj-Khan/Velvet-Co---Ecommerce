@@ -20,7 +20,10 @@
                     <div class="wsus__banner_content">
                         <div class="row banner_slider">
                             <div class="col-xl-12">
-                                <div class="wsus__single_slider" style="background: url(images/slider_1.jpg);">
+<div
+  class="wsus__single_slider"
+  :style="{ backgroundImage: `url(${slider1})` }"
+>
                                     <div class="wsus__single_slider_text">
                                         <h3>new arrivals</h3>
                                         <h1>men's fashion</h1>
@@ -30,7 +33,10 @@
                                 </div>
                             </div>
                             <div class="col-xl-12">
-                                <div class="wsus__single_slider" style="background: url(images/slider_2.jpg);">
+                                <div
+  class="wsus__single_slider"
+  :style="{ backgroundImage: `url(${slider2})` }"
+>
                                     <div class="wsus__single_slider_text">
                                         <h3>new arrivals</h3>
                                         <h1>kid's fashion</h1>
@@ -40,7 +46,10 @@
                                 </div>
                             </div>
                             <div class="col-xl-12">
-                                <div class="wsus__single_slider" style="background: url(images/slider_3.jpg);">
+                                <div
+  class="wsus__single_slider"
+  :style="{ backgroundImage: `url(${slider3})` }"
+>
                                     <div class="wsus__single_slider_text">
                                         <h3>new arrivals</h3>
                                         <h1>winter collection</h1>
@@ -289,42 +298,58 @@
     <!--============================
         BRAND SLIDER START
     ==============================-->
-    <section id="wsus__brand_sleder" class="brand_slider_2">
-        <div class="container">
-            <div class="brand_border">
+<section id="wsus__brand_sleder" class="brand_slider_2">
+
+    <div class="container">
+
+        <div class="brand-heading">
+
+            <span>Luxury Brands</span>
+
+            <h2>
+                Trusted Partners
+            </h2>
+
+            <p>
+                Explore premium brands trusted by thousands of customers worldwide.
+            </p>
+
+        </div>
+            
+            <div class="brand-wrapper">
                 <div class="row brand_slider">
                     <div class="col-xl-2">
-                        <div class="wsus__brand_logo">
+                        <div class="brand-card">
                             <img src="/assets/images/brand_logo_1.jpg" alt="brand" class="img-fluid w-100">
                         </div>
                     </div>
                     <div class="col-xl-2">
-                        <div class="wsus__brand_logo">
+                        <div class="brand-card">
                             <img src="/assets/images/brand_logo_2.jpg" alt="brand" class="img-fluid w-100">
                         </div>
                     </div>
                     <div class="col-xl-2">
-                        <div class="wsus__brand_logo">
+                        <div class="brand-card">
                             <img src="/assets/images/brand_logo_3.jpg" alt="brand" class="img-fluid w-100">
                         </div>
                     </div>
                     <div class="col-xl-2">
-                        <div class="wsus__brand_logo">
+                        <div class="brand-card">
                             <img src="/assets/images/brand_logo_4.jpg" alt="brand" class="img-fluid w-100">
                         </div>
                     </div>
                     <div class="col-xl-2">
-                        <div class="wsus__brand_logo">
+                        <div class="brand-card">
                             <img src="/assets/images/brand_logo_5.jpg" alt="brand" class="img-fluid w-100">
                         </div>
                     </div>
                     <div class="col-xl-2">
-                        <div class="wsus__brand_logo">
+                        <div class="brand-card">
                             <img src="/assets/images/brand_logo_6.jpg" alt="brand" class="img-fluid w-100">
                         </div>
                     </div>
                     <div class="col-xl-2">
-                        <div class="wsus__brand_logo">
+                        <div class="brand-card">
                             <img src="/assets/images/brand_logo_3.jpg" alt="brand" class="img-fluid w-100">
                         </div>
                     </div>
@@ -341,7 +366,9 @@ import ProductListTop  from './products/ProductListTop.vue';
 import ProductModal from './products/ProductModal.vue';
 import { useProductsStore } from '@/stores/useProductsStore';
 import Spinner from './layouts/Spinner.vue';
-
+import slider1 from '@/assets/images/slider_1.jpg';
+import slider2 from '@/assets/images/slider_2.jpg';
+import slider3 from '@/assets/images/slider_3.jpg';
 const productsStore = useProductsStore();
 
 import { onMounted } from 'vue';
@@ -351,119 +378,341 @@ onMounted(() => {
 });
 
 onMounted(() => {
-    // Đảm bảo jQuery đã được tải và có sẵn
-    if (typeof $ !== 'undefined') {
-        // Khởi tạo lại slick slider khi trang được tải
-        $('.brand_slider').slick({
-            slidesToShow: 6,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 4000,
-            dots: false,
-            arrows: true,
-            nextArrow: '<i class="fas fa-chevron-right nxt_arr"></i>',
-            prevArrow: '<i class="fas fa-chevron-left prv_arr"></i>',
+    productsStore.fetchAllProducts();
 
-            responsive: [
-                {
-                    breakpoint: 1200,
-                    settings: {
-                        slidesToShow: 5,
-                        slidesToScroll: 1,
-                    }
-                },
-                {
-                    breakpoint: 992,
-                    settings: {
-                        slidesToShow: 4,
-                        slidesToScroll: 1,
-                    }
-                },
-                {
-                    breakpoint: 768,
-                    settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 1,
-                    }
-                },
-                {
-                    breakpoint: 576,
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1,
-                    }
+    if (typeof $ === "undefined") return;
+
+    // Destroy old slick if exists
+    if ($('.brand_slider').hasClass('slick-initialized')) {
+        $('.brand_slider').slick('unslick');
+    }
+
+    // ==========================
+    // Brand Slider
+    // ==========================
+    $('.brand_slider').slick({
+        slidesToShow: 6,
+        slidesToScroll: 1,
+
+        infinite: true,
+
+        autoplay: true,
+        autoplaySpeed: 0,
+        speed: 5000,
+        cssEase: 'linear',
+
+        arrows: false,
+        dots: false,
+
+        pauseOnHover: false,
+        pauseOnFocus: false,
+
+        swipe: false,
+        draggable: false,
+        touchMove: false,
+
+        responsive: [
+            {
+                breakpoint: 1200,
+                settings: {
+                    slidesToShow: 5
                 }
-            ]
-        });
-        $('.banner_slider').slick({
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 4000,
-            dots: true,
-            arrows: false,
-        });
-        //=======COUNTDOWN======   
-        var d = new Date(),
-            countUpDate = new Date();
-        d.setDate(d.getDate() + 90);
-
-        // default example
-        simplyCountdown('.simply-countdown-one', {
-            year: d.getFullYear(),
-            month: d.getMonth() + 1,
-            day: d.getDate(),
-            enableUtc: true
-        });
-        //*==========FLASH SELL SLIDER========= 
-
-        // Initialize the Slick carousel for the flash_sell_slider
-        $('.flash_sell_slider').slick({
-            slidesToShow: 4,                // Show 4 products at a time
-            slidesToScroll: 1,              // Scroll 1 product at a time
-            autoplay: true,                 // Enable autoplay
-            autoplaySpeed: 3000,            // Speed of autoplay (3 seconds)
-            arrows: true,                   // Enable next/prev arrows
-            nextArrow: '<i class="fas fa-chevron-right nxt_arr"></i>',   // Previous arrow
-            prevArrow: '<i class="fas fa-chevron-left prv_arr"></i>',         // Next arrow
-            responsive: [
-                {
-                    breakpoint: 1200,
-                    settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 1,
-                    }
-                },
-                {
-                    breakpoint: 992,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 1,
-                    }
-                },
-                {
-                    breakpoint: 768,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 1,
-                    }
-                },
-                {
-                    breakpoint: 576,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 1,
-                    }
+            },
+            {
+                breakpoint: 992,
+                settings: {
+                    slidesToShow: 4
                 }
-            ]
-        });
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 3
+                }
+            },
+            {
+                breakpoint: 576,
+                settings: {
+                    slidesToShow: 2
+                }
+            }
+        ]
+    });
 
+    // ==========================
+    // Banner Slider
+    // ==========================
+    $('.banner_slider').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 4000,
+        dots: true,
+        arrows: false,
+    });
 
+    // ==========================
+    // Countdown
+    // ==========================
+    const d = new Date();
+    d.setDate(d.getDate() + 90);
+
+    simplyCountdown('.simply-countdown-one', {
+        year: d.getFullYear(),
+        month: d.getMonth() + 1,
+        day: d.getDate(),
+        enableUtc: true
+    });
+
+    // ==========================
+    // Flash Sell Slider
+    // ==========================
+    $('.flash_sell_slider').slick({
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 3000,
+        arrows: true,
+        nextArrow: '<i class="fas fa-chevron-right nxt_arr"></i>',
+        prevArrow: '<i class="fas fa-chevron-left prv_arr"></i>',
+
+        responsive: [
+            {
+                breakpoint: 1200,
+                settings: {
+                    slidesToShow: 3
+                }
+            },
+            {
+                breakpoint: 992,
+                settings: {
+                    slidesToShow: 2
+                }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 2
+                }
+            },
+            {
+                breakpoint: 576,
+                settings: {
+                    slidesToShow: 2
+                }
+            }
+        ]
+    });
+
+});
+</script>
+
+<style scoped>
+
+.brand-heading{
+    text-align:center;
+    margin-bottom:55px;
+}
+
+.brand-heading span{
+    display:inline-block;
+    padding:8px 18px;
+    background:#F8F4EA;
+    color:#B8943B;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:.5px;
+}
+
+.brand-heading h2{
+    margin:18px 0 12px;
+    font-size:42px;
+    font-weight:700;
+    color:#222;
+}
+
+.brand-heading p{
+    max-width:620px;
+    margin:auto;
+    color:#777;
+    line-height:1.8;
+    font-size:16px;
+}
+
+.brand-wrapper{
+    background:#fff;
+    border-radius:24px;
+    padding:35px;
+    box-shadow:0 15px 40px rgba(0,0,0,.05);
+}
+
+.brand-card{
+    background:#fff;
+    height:140px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:18px;
+
+    border:1px solid #F1F1F1;
+
+    transition:.35s;
+
+    margin:12px;
+}
+
+.brand-card img{
+
+    max-width:120px;
+
+    max-height:70px;
+
+    width:auto;
+
+    height:auto;
+
+    object-fit:contain;
+
+    transition:.35s;
+}
+
+.brand-card:hover{
+
+    transform:translateY(-8px);
+
+    border-color:#E5CC91;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+}
+
+.brand-card:hover img{
+
+    transform:scale(1.08);
+}
+
+#wsus__brand_sleder{
+    padding:50px 0;
+    background:#FCFCFC;
+}
+
+.brand_slider .slick-track{
+    display:flex;
+    align-items:center;
+}
+
+.brand_slider .slick-slide{
+    height:inherit;
+}
+
+.nxt_arr,
+.prv_arr{
+
+    width:48px;
+    height:48px;
+
+    border-radius:50%;
+
+    background:#fff;
+
+    color:#222;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+    z-index:10;
+}
+
+.nxt_arr:hover,
+.prv_arr:hover{
+
+    background:#B8943B;
+
+    color:#fff;
+
+    transform:scale(1.08);
+
+}
+
+.prv_arr{
+
+    left:-25px;
+
+}
+
+.nxt_arr{
+
+    right:-25px;
+
+}
+
+.brand_slider{
+
+    margin-top:10px;
+
+}
+
+.brand-card{
+
+    margin:15px;
+
+}
+
+@media(max-width:991px){
+
+    .brand-heading h2{
+
+        font-size:34px;
 
     }
-});
 
+    .brand-wrapper{
 
+        padding:25px;
 
+    }
 
-</script>
+}
+
+@media(max-width:576px){
+
+    #wsus__brand_sleder{
+
+        padding:70px 0;
+
+    }
+
+    .brand-heading h2{
+
+        font-size:28px;
+
+    }
+
+    .brand-heading p{
+
+        font-size:14px;
+
+    }
+
+    .brand-card{
+
+        height:110px;
+
+    }
+
+    .brand-card img{
+
+        max-width:90px;
+
+    }
+
+}
+
+</style>

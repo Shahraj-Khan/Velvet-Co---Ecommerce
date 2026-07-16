@@ -3,7 +3,7 @@
     <h2 class="accordion-header">
       <button class="accordion-button" type="button" data-bs-toggle="collapse"
         data-bs-target="#collapseColor" aria-expanded="true">
-        Màu sắc ({{ totalColorProducts }})
+        Colors ({{ totalColorProducts }})
       </button>
     </h2>
     <div id="collapseColor" class="accordion-collapse collapse show">

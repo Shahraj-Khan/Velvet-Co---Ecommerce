@@ -15,7 +15,9 @@ import OrderConfirmation from "@/components/checkout/OrderConfirmation.vue";
 import PaymentResult from "@/components/checkout/PaymentResult.vue";
 import OrderList from "@/components/dashboard/pages/orders/OrderList.vue";
 import OrderInvoice from "@/components/dashboard/pages/orders/OrderInvoice.vue";
-
+import TrackOrder from "@/components/trackorder/TrackOrder.vue";
+import Contact from "@/components/Contact.vue";
+import DailyDeals from "@/components/DailyDeals.vue";
 const router = createRouter({
   history: createWebHashHistory(),
   routes: [
@@ -33,6 +35,14 @@ const router = createRouter({
       path: "/login",
       name: "login",
       component: Login,
+      meta: {
+        layout: "default",
+      },
+    },
+    {
+      path: "/register",
+      name: "register",
+      component: Register,
       meta: {
         layout: "default",
       },
@@ -119,6 +129,39 @@ const router = createRouter({
         layout: "default",
       },
     },
+          {
+  path: "/track-order",
+  name: "track-order",
+  component: TrackOrder,
+  meta: {
+    layout: "default",
+  },
+},
+{
+  path: "/contact",
+  name: "contact",
+  component: Contact,
+  meta: {
+    layout: "default",
+  },
+},
+{
+    path: "/orders",
+    name: "orders",
+    component: () => import("@/components/orders/MyOrders.vue"),
+    meta:{
+        layout:"default",
+        requiresAuth:true
+    }
+},
+{
+    path: "/daily-deals",
+    name: "daily-deals",
+    component: DailyDeals,
+    meta: {
+        layout: "default",
+    },
+},
     {
       path: "/dashboard",
       name: "dashboard",
@@ -148,7 +191,7 @@ const router = createRouter({
              
           },
           props: true
-      }
+      },
       ],
     },
   ],
@@ -158,15 +201,16 @@ router.beforeEach((to, from, next) => {
   const authStore = useAuthStore();
 
   // 1. Danh sách các route public (không cần login)
-  const publicRoutes = [
-    "/",
-    "/login",
-    "/register",
-    "/shop",
-    "/product/*",
-    "/category/*",
-  ];
-
+const publicRoutes = [
+  "/",
+  "/login",
+  "/register",
+  "/shop",
+  "/contact",
+  "/track-order",
+  "/product/*",
+  "/category/*",
+];
   // 2. Kiểm tra route hiện tại có phải public không
   const isPublicRoute = publicRoutes.some((route) => {
     if (route.endsWith("/*")) {

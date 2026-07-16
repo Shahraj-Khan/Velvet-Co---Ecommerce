@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('frontend')
 
-<div class="login-page bg-image pt-8 pb-8 pt-md-12 pb-md-12 pt-lg-17 pb-lg-17" style="background-image: url('assets/images/backgrounds/login-bg.jpg')">
+<div class="login-page bg-image pt-8 pb-8 pt-md-12 pb-md-12 pt-lg-17 pb-lg-17" style="background-image: url('{{ asset('assets/images/backgrounds/login-bg.jpg') }}')">
     <div class="container">
         <div class="form-box">
             <div class="form-tab">
@@ -15,7 +15,12 @@
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="signin-2" role="tabpanel" aria-labelledby="signin-tab-2">
-                        @yield('errors') <!-- Gọi section hiển thị lỗi -->
+
+            @if(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
                         <form action="{{ route('admin.auth') }}" method="POST">
                             @csrf
                             
@@ -82,16 +87,4 @@
         </div><!-- End .form-box -->
     </div><!-- End .container -->
 </div><!-- End .login-page section-bg -->
-@endsection
-
-@section('errors')
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
 @endsection

@@ -23,14 +23,14 @@ export const useCartStore = defineStore("cart", {
       const shipping = 10.00;
       return state.subtotal + shipping - state.discountAmount;
     },
-    formatPrice: () => (price) => {
-      return new Intl.NumberFormat("vi-VN", {
-        style: "currency",
-        currency: "VND",
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 2,
-      }).format(price).replace('₫', '').trim() + ' VND';
-    }
+formatPrice: () => (price) => {
+  return new Intl.NumberFormat("en-BD", {
+    style: "currency",
+    currency: "BDT",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 2,
+  }).format(price);
+}
   },
   actions: {
     async applyCoupon(code) {
@@ -117,25 +117,25 @@ export const useCartStore = defineStore("cart", {
     
       if (index !== -1) {
         if (this.cartItems[index].quantity + item.quantity > item.maxQuantity) {
-          toast.warning(`Số lượng tối đa là ${item.maxQuantity}`, {
+          toast.warning(`Maximum quantity reached ${item.maxQuantity}`, {
             timeout: 2000,
           });
           return;
         } else {
           this.cartItems[index].quantity += item.quantity;
-          toast.success("Sản phẩm đã được thêm vào giỏ hàng", {
+          toast.success("Product added to cart", {
             timeout: 2000,
           });
         }
       } else {
         if (item.quantity > item.maxQuantity) {
-          toast.warning(`Số lượng tối đa là ${item.maxQuantity}`, {
+          toast.warning(`Maximum quantity reached ${item.maxQuantity}`, {
             timeout: 2000,
           });
           return;
         }
         this.cartItems.push(item);
-        toast.success("Sản phẩm đã được thêm vào giỏ hàng", {
+        toast.success("Product added to cart", {
           timeout: 2000,
         });
       }

@@ -3,7 +3,7 @@
     <h2 class="accordion-header">
       <button class="accordion-button" type="button" data-bs-toggle="collapse"
         data-bs-target="#collapsePrice" aria-expanded="true">
-        Giá
+        Price
         <span v-if="isPriceFilterActive" class="badge bg-danger ms-2">Đang lọc</span>
       </button>
     </h2>
@@ -11,8 +11,8 @@
       <div class="accordion-body">
         <div class="price-slider-container">
           <div class="price-display d-flex justify-content-between mb-2">
-            <span>Từ: {{ formatPrice(tempPriceRange[0]) }}</span>
-            <span>Đến: {{ formatPrice(tempPriceRange[1]) }}</span>
+            <span>from: {{ formatPrice(tempPriceRange[0]) }}</span>
+            <span>To: {{ formatPrice(tempPriceRange[1]) }}</span>
           </div>
           
           <div class="price-slider">
@@ -24,12 +24,12 @@
           
           <div class="price-inputs d-flex gap-2 mt-3">
             <div class="form-group flex-grow-1">
-              <label>Từ</label>
+              <label>From</label>
               <input type="number" class="form-control" v-model.number="tempPriceRange[0]" 
                 @change="validateInput(0)" min="0" :max="tempPriceRange[1]">
             </div>
             <div class="form-group flex-grow-1">
-              <label>Đến</label>
+              <label>To</label>
               <input type="number" class="form-control" v-model.number="tempPriceRange[1]" 
                 @change="validateInput(1)" :min="tempPriceRange[0]" :max="maxPrice">
             </div>
@@ -37,10 +37,10 @@
           
           <div class="d-flex gap-2 mt-3">
             <button class="btn btn-primary flex-grow-1" @click="applyPriceFilter">
-              <i class="fas fa-filter me-1"></i> Lọc
+              <i class="fas fa-filter me-1"></i> Filter
             </button>
             <button v-if="isPriceFilterActive" class="btn btn-outline-danger" @click="resetPriceFilter">
-              <i class="fas fa-times me-1"></i> Xóa
+              <i class="fas fa-times me-1"></i> Clear
             </button>
           </div>
         </div>
@@ -136,7 +136,7 @@ const resetPriceFilter = () => {
 
 // Hàm format giá
 const formatPrice = (price) => {
-  return new Intl.NumberFormat('vi-VN').format(price) + ' ₫';
+  return new Intl.NumberFormat('vi-VN').format(price) + '';
 };
 </script>
 

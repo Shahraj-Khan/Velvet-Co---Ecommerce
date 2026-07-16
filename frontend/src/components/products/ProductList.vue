@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-xl-12">
       <div class="wsus__section_header for_md">
-        <h3>Gợi ý hôm nay</h3>
+        <h3>today's suggestion</h3>
       </div>
     </div>
   </div>
@@ -21,7 +21,7 @@
         <span>Đang tải thêm sản phẩm...</span>
       </div>
       <div v-if="!hasMore && visibleProducts.length > 0" class="col-12 text-center my-3 text-muted">
-        <span>Đã hiển thị tất cả sản phẩm</span>
+        <span>Showing all products</span>
       </div>
     </div>
   </div>

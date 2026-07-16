@@ -3,7 +3,7 @@
     <h2 class="accordion-header">
       <button class="accordion-button" type="button" data-bs-toggle="collapse"
         data-bs-target="#collapseCategory" aria-expanded="true">
-        Danh mục ({{ totalCategoryProducts }})
+        Categories ({{ totalCategoryProducts }})
       </button>
     </h2>
     <div id="collapseCategory" class="accordion-collapse collapse show">

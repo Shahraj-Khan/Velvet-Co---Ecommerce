@@ -31,7 +31,7 @@
         <span>Đang tải thêm sản phẩm...</span>
       </div>
       <div v-if="!hasMore && topProducts.length > 0" class="text-center my-3 text-muted">
-        <span>Đã hiển thị tất cả sản phẩm</span>
+        <span>Showing all products</span>
       </div>
     </div>
   </div>

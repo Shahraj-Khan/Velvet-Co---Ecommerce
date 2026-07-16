@@ -1,7 +1,7 @@
 <template>
   <div class="col-xl-3 col-lg-4">
     <div class="wsus__sidebar_filter">
-      <p>Bộ lọc</p>
+      <p>Catagory</p>
       <span class="wsus__filter_icon">
         <i class="far fa-minus" id="minus"></i>
         <i class="far fa-plus" id="plus"></i>

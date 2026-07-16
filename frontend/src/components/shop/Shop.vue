@@ -21,13 +21,24 @@
                   </div>
                 </div>
                
-                <div class="wsus__topbar_select">
-                  <select class="" v-model="sortOption" @change="handleSort">
-                    <option value="newest">Mới nhất</option>
-                    <option value="price_asc">Giá tăng dần</option>
-                    <option value="price_desc">Giá giảm dần</option>
-                  </select>
-                </div>
+<!-------Top Ber Select start---------->
+
+<div class="wsus__topbar_select">
+  <div class="custom-select-wrapper">
+    <select v-model="sortOption" @change="handleSort">
+      <option value="newest">Newest</option>
+      <option value="price_asc">Price: Low to High</option>
+      <option value="price_desc">Price: High to Low</option>
+    </select>
+
+    <span class="select-icon">
+      <i class="fas fa-chevron-down"></i>
+    </span>
+  </div>
+</div>
+
+<!-------Top Ber Select End---------->
+              
               </div>
             </div>
           </div>
@@ -41,7 +52,7 @@
               </div>
               
               <div v-else-if="!hasProducts" class="text-center py-5">
-                <h5>Không tìm thấy sản phẩm phù hợp</h5>
+                <h5>No matching products found</h5>
               </div>
               
               <div v-else class="row">
