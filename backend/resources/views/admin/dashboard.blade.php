@@ -2,68 +2,351 @@
 @section('content')
 <div class="page-wrapper">
     <div class="page-content">
-        <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4">
-           <div class="col">
-             <div class="card radius-10 border-start border-0 border-4 border-info">
-                <div class="card-body">
-                    <div class="d-flex align-items-center">
-                        <div>
-                            <p class="mb-0 text-secondary">Total Orders</p>
-                            <h4 class="my-1 text-info">{{ $totalOrders }}</h4>
-                            <p class="mb-0 font-13">+2.5% from last week</p>
-                        </div>
-                        <div class="widgets-icons-2 rounded-circle bg-gradient-blues text-white ms-auto"><i class='bx bxs-cart'></i>
-                        </div>
-                    </div>
+
+    <div class="dashboard">
+
+    {{-- ==========================
+        PAGE HEADER
+    ========================== --}}
+    <div class="dashboard-header mb-4">
+
+        <h2 class="page-title">
+            Dashboard
+        </h2>
+
+        <p class="page-subtitle">
+            Welcome back,
+            <strong>{{ auth()->guard('admin')->user()->name }}</strong>
+        </p>
+
+    </div>
+
+
+    {{-- ==========================
+        STATISTICS
+    ========================== --}}
+    <div class="row g-4">
+
+        {{-- Revenue --}}
+        <div class="col-xl-3 col-md-6">
+
+            <div class="dashboard-card">
+
+                <div class="card-info">
+
+                    <span class="card-title">
+                        Total Revenue
+                    </span>
+
+                    <h3 class="card-value">
+                        ৳{{ number_format($totalRevenue) }}
+                    </h3>
+
+                    <span class="card-growth text-success">
+                        +12.4%
+                    </span>
+
                 </div>
-             </div>
-           </div>
-           <div class="col">
-            <div class="card radius-10 border-start border-0 border-4 border-danger">
-               <div class="card-body">
-                   <div class="d-flex align-items-center">
-                       <div>
-                           <p class="mb-0 text-secondary">Total Revenue</p>
-                           <h4 class="my-1 text-danger">৳{{ number_format($totalRevenue, 2) }}</h4>
-                           <p class="mb-0 font-13">+5.4% from last week</p>
-                       </div>
-                       <div class="widgets-icons-2 rounded-circle bg-gradient-burning text-white ms-auto"><i class='bx bxs-wallet'></i>
-                       </div>
-                   </div>
-               </div>
+
+                <div class="card-icon bg-primary-soft">
+                    <i class="bx bx-dollar-circle"></i>
+                </div>
+
             </div>
-          </div>
-          <div class="col">
-            <div class="card radius-10 border-start border-0 border-4 border-success">
-               <div class="card-body">
-                   <div class="d-flex align-items-center">
-                       <div>
-                           <p class="mb-0 text-secondary">Pending Orders</p>
-                           <h4 class="my-1 text-success">{{ $totalCustomers }}</h4>
-                           <p class="mb-0 font-13">-4.5% from last week</p>
-                       </div>
-                       <div class="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto"><i class='bx bxs-bar-chart-alt-2' ></i>
-                       </div>
-                   </div>
-               </div>
+
+        </div>
+
+
+        {{-- Orders --}}
+        <div class="col-xl-3 col-md-6">
+
+            <div class="dashboard-card">
+
+                <div class="card-info">
+
+                    <span class="card-title">
+                        Total Orders
+                    </span>
+
+                    <h3 class="card-value">
+                        {{ $totalOrders }}
+                    </h3>
+
+                    <span class="card-growth text-success">
+                        +8.1%
+                    </span>
+
+                </div>
+
+                <div class="card-icon bg-warning-soft">
+                    <i class="bx bx-cart-alt"></i>
+                </div>
+
             </div>
-          </div>
-          <div class="col">
-            <div class="card radius-10 border-start border-0 border-4 border-warning">
-               <div class="card-body">
-                   <div class="d-flex align-items-center">
-                       <div>
-                           <p class="mb-0 text-secondary">Total Customers</p>
-                           <h4 class="my-1 text-warning">{{ $pendingOrders }}</h4>
-                           <p class="mb-0 font-13">+8.4% from last week</p>
-                       </div>
-                       <div class="widgets-icons-2 rounded-circle bg-gradient-orange text-white ms-auto"><i class='bx bxs-group'></i>
-                       </div>
-                   </div>
-               </div>
+
+        </div>
+
+
+        {{-- Products --}}
+        <div class="col-xl-3 col-md-6">
+
+            <div class="dashboard-card">
+
+                <div class="card-info">
+
+                    <span class="card-title">
+                        Products
+                    </span>
+
+                    <h3 class="card-value">
+                        {{ \App\Models\Product::count() }}
+                    </h3>
+
+                    <span class="card-growth text-primary">
+                        Active
+                    </span>
+
+                </div>
+
+                <div class="card-icon bg-info-soft">
+                    <i class="bx bx-package"></i>
+                </div>
+
             </div>
-          </div> 
-        </div><!--end row-->
+
+        </div>
+
+
+        {{-- Customers --}}
+        <div class="col-xl-3 col-md-6">
+
+            <div class="dashboard-card">
+
+                <div class="card-info">
+
+                    <span class="card-title">
+                        Customers
+                    </span>
+
+                    <h3 class="card-value">
+                        {{ $totalCustomers }}
+                    </h3>
+
+                    <span class="card-growth text-success">
+                        +4.5%
+                    </span>
+
+                </div>
+
+                <div class="card-icon bg-success-soft">
+                    <i class="bx bx-user"></i>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div><!--end row-->
+
+{{-- ==========================
+    ANALYTICS
+========================== --}}
+
+<div class="row g-4 mb-4">
+
+    {{-- Sales Chart --}}
+    <div class="col-lg-7">
+
+<div class="card radius-12 h-100">
+
+    <div class="card-body">
+
+        <div class="d-flex align-items-center justify-content-between mb-3">
+
+            <div>
+
+                <h5 class="mb-1 fw-bold">
+                    Monthly Revenue
+                </h5>
+
+                <span class="text-muted">
+                    {{ now()->year }}
+                </span>
+
+            </div>
+
+        </div>
+
+        <div id="monthlyRevenueChart"></div>
+
+    </div>
+
+</div>
+
+    </div>
+
+
+    {{-- Revenue Summary --}}
+<div class="col-lg-5">
+
+    <div class="card radius-12 border-0 shadow-sm h-100">
+
+        <div class="card-body">
+
+            <div class="mb-4">
+
+                <h5 class="fw-bold mb-1">
+                    Revenue Overview
+                </h5>
+
+                <span class="text-muted">
+                    {{ now()->year }}
+                </span>
+
+            </div>
+
+            {{-- Today --}}
+            <div class="revenue-box">
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <div class="d-flex align-items-center">
+
+                        <div class="revenue-icon bg-primary-soft">
+                            <i class="bx bx-sun"></i>
+                        </div>
+
+                        <div class="ms-3">
+
+                            <h6 class="mb-0">Today</h6>
+
+                            <small class="text-muted">
+                                Current Day
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                    <h6 class="fw-bold mb-0">
+                        ৳ {{ number_format($toDayOrders->sum('total'),2) }}
+                    </h6>
+
+                            <small class="text-success fw-semibold">
+                            <i class="bx bx-trending-up"></i>
+                            {{ $growth['today'] }}
+                            </small>
+
+                </div>
+            </div>
+
+            {{-- Yesterday --}}
+            <div class="revenue-box">
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <div class="d-flex align-items-center">
+
+                        <div class="revenue-icon bg-warning-soft">
+                            <i class="bx bx-time"></i>
+                        </div>
+
+                        <div class="ms-3">
+
+                            <h6 class="mb-0">Yesterday</h6>
+
+                            <small class="text-muted">
+                                Previous Day
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                    <h6 class="fw-bold mb-0">
+                        ৳ {{ number_format($yesterdayOrders->sum('total'),2) }}
+                    </h6>
+                            <small class="text-danger fw-semibold">
+        <i class="bx bx-trending-down"></i>
+        {{ $growth['yesterday'] }}
+    </small>
+                </div>
+            </div>
+
+            {{-- Month --}}
+            <div class="revenue-box">
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <div class="d-flex align-items-center">
+
+                        <div class="revenue-icon bg-success-soft">
+                            <i class="bx bx-calendar"></i>
+                        </div>
+
+                        <div class="ms-3">
+
+                            <h6 class="mb-0">This Month</h6>
+
+                            <small class="text-muted">
+                                {{ now()->format('F') }}
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                    <h6 class="fw-bold mb-0">
+                        ৳ {{ number_format($monthOrders->sum('total'),2) }}
+                    </h6>
+
+                        <small class="text-success fw-semibold">
+        <i class="bx bx-trending-up"></i>
+        {{ $growth['month'] }}
+    </small>
+
+                </div>
+            </div>
+
+            {{-- Year --}}
+            <div class="revenue-box mb-0">
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <div class="d-flex align-items-center">
+
+                        <div class="revenue-icon bg-info-soft">
+                            <i class="bx bx-line-chart"></i>
+                        </div>
+
+                        <div class="ms-3">
+
+                            <h6 class="mb-0">This Year</h6>
+
+                            <small class="text-muted">
+                                {{ now()->year }}
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                    <h6 class="fw-bold mb-0">
+                        ৳ {{ number_format($yearOrders->sum('total'),2) }}
+                    </h6>
+                            <small class="text-success fw-semibold">
+        <i class="bx bx-trending-up"></i>
+        {{ $growth['year'] }}
+    </small>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
 
         <div class="row">
            <div class="col-12 col-lg-8 d-flex">
@@ -639,21 +922,55 @@
 
 
 <script>
-    const salesData = @json($salesData);
 
-    const salesLabels = [
-        'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-    ];
+const salesData = @json($salesData);
 
- window.statusData = @json($statusData);
+const salesLabels = [
+    'Jan','Feb','Mar','Apr','May','Jun',
+    'Jul','Aug','Sep','Oct','Nov','Dec'
+];
 
- //chart-5
- window.orderData = @json($orderData);
-//chart-3
+window.statusData = @json($statusData);
+window.orderData = @json($orderData);
 window.paymentData = @json($paymentData);
 
 </script>
 
+@push('scripts')
+
+<script>
+
+var options = {
+
+    chart: {
+        type: 'area',
+        height: 340,
+        toolbar: {
+            show: false
+        }
+    },
+
+    series: [{
+        name: 'Revenue',
+        data: salesData
+    }],
+
+    xaxis: {
+        categories: [
+            'Jan','Feb','Mar','Apr','May','Jun',
+            'Jul','Aug','Sep','Oct','Nov','Dec'
+        ]
+    }
+
+};
+
+new ApexCharts(
+    document.querySelector("#monthlyRevenueChart"),
+    options
+).render();
+
+</script>
+
+@endpush
 
 @endsection

@@ -102,30 +102,76 @@
 </a>
             </li>
 
-            <li class="nav-item dropdown">
 
-                <a class="nav-link d-flex align-items-center gap-3"
-                   href="#"
-                   data-bs-toggle="dropdown">
 
-                    <img src="{{ asset('admin/assets/images/avatars/avatar-26.png') }}"
-                         class="user-img">
+<li class="nav-item dropdown">
 
-                    <div class="user-info">
+    <a class="nav-link dropdown-toggle d-flex align-items-center gap-3"
+       href="#"
+       role="button"
+       data-bs-toggle="dropdown"
+       aria-expanded="false">
 
-                        <h6 class="user-name mb-0">
-                            Shahraj Khan
-                        </h6>
+        <img src="{{ asset('admin/assets/images/avatars/avatar-26.png') }}"
+             class="user-img"
+             alt="User">
 
-                        <small class="text-muted">
-                            Administrator
-                        </small>
+        <div class="user-info">
 
-                    </div>
+            <h6 class="user-name mb-0">
+                {{ auth('admin')->user()->name }}
+            </h6>
 
-                </a>
+            <small class="text-muted">
+                Administrator
+            </small>
 
-            </li>
+        </div>
+
+    </a>
+
+    <ul class="dropdown-menu dropdown-menu-end profile-dropdown">
+
+        <li>
+            <h6 class="dropdown-header">
+                My Account
+            </h6>
+        </li>
+
+        <li>
+            <a class="dropdown-item" href="#">
+                <i class="bx bx-user me-2"></i>
+                Profile
+            </a>
+        </li>
+
+        <li>
+            <a class="dropdown-item" href="#">
+                <i class="bx bx-cog me-2"></i>
+                Settings
+            </a>
+        </li>
+
+        <li>
+            <hr class="dropdown-divider">
+        </li>
+
+        <li>
+
+<form method="POST" action="{{ route('admin.logout') }}">
+    @csrf
+
+    <button type="submit" class="dropdown-item text-danger">
+        <i class="bx bx-log-out me-2"></i>
+        Logout
+    </button>
+</form>
+
+        </li>
+
+    </ul>
+
+</li>
 
         </ul>
 
@@ -384,6 +430,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
+    
     <!-- DataTable JS -->
 
     <style>
@@ -508,8 +555,9 @@
     } );
 	});
 </script>
-@stack('script')
 <link rel="stylesheet" href="{{ asset('admin/assets/css/dashboard.css') }}">
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+@stack('scripts')
 </body>
 
 </html>

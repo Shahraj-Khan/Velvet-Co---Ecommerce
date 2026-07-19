@@ -185,6 +185,15 @@ class DashboardController extends Controller
         ->take(5)
         ->get();
 
+    /* ==========================================
+     | Growth 
+     ========================================== */
+    $growth = [
+    'today' => '+12%',
+    'yesterday' => '-3%',
+    'month' => '+8%',
+    'year' => '+15%',
+    ];
 
     /* ==========================================
      | Return View
@@ -214,7 +223,9 @@ class DashboardController extends Controller
         'paymentData',
 
         'lowStockProducts',
-        'topCategories'
+        'topCategories',
+
+        'growth'
     ));
 }
 }
